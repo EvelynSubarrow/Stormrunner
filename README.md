@@ -1,4 +1,6 @@
 # Stormrunner
+![A yellow RCX robot sits atop a field of sand, below the wreck of the CESS Decatur spaceship](https://i.imgur.com/jA4Ezz0.png "Screenshot")
+
 ## About Stormrunner
 Stormrunner was developed by Templar Studios and released in the year 2000 to
 promote Lego Mindstorms' range of RCX robots. The game was revolutionary, at the
