@@ -1,0 +1,42 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java-library'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+dependencies {
+    implementation files("libs/TemplarStudios-Stormrunner.jar")
+}
+
+version '1.0.0'
+
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources", "libs"]
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            "Version"     : version,
+            "Main-Class"  : 'moe.evelyn.games.stormrunner.Main'
+        )
+    }
+}
+
+shadowJar {
+    exclude "META-INF/**"
+}
