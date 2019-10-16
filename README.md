@@ -19,7 +19,7 @@ application, but I plan to make some minor changes to make the game more
 playable on modern systems.
 
 ## How to use this project
-Please use the latest [/releases](tagged release).
+Please use the latest [tagged release](/releases).
 
 If you don't trust the JAR files I've provided (and you shouldn't), you can
 obtain an archive of Stormrunner at the link in this section. Place
@@ -33,3 +33,8 @@ is running `gradle shadowJar`. You should then have a runnable game jar in
 ### links
 * http://biomediaproject.com/bmp/files/LEGO/gms/download/Mindstorms/Stormrunner.zip
 
+## Acknowledgements
+This project relies heavily on Lee Benfield's
+[CFR](https://github.com/leibnitz27/cfr/), and wouldn't be possible without
+bugfixes made in response to issues encountered decompiling these old
+classfiles. 
