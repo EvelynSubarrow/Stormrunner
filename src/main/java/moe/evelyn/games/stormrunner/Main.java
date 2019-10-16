@@ -36,7 +36,7 @@ public class Main
             @Override
             public void componentResized(ComponentEvent e)
             {
-                frame.setSize(frame.getMinimumSize());
+
             }
         });
     }
