@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.147-SNAPSHOT.
- */
 package com.templar.games.stormrunner;
 
 import com.ms.security.PermissionID;
