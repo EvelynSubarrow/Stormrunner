@@ -72,6 +72,8 @@ import java.util.Hashtable;
 import java.util.Vector;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import moe.evelyn.games.stormrunner.Main;
 import netscape.security.ForbiddenTargetException;
 import netscape.security.PrivilegeManager;
 
@@ -266,13 +268,15 @@ ImageFilenameProvider {
         this.bay = new CargoBay(this);
         this.bay.setLocation(0, 0);
         this.ViewScreen = new SimpleContainer();
-        this.ViewScreen.setBounds(0, 0, this.getSize().width, this.getSize().height);
+        // 0, 0, this.getSize().width, this.getSize().height
+        this.ViewScreen.setBounds(Main.frame.getBounds());
         this.BayScreen = new SimpleContainer();
         this.BayScreen.setBounds(0, 0, this.getSize().width, this.getSize().height);
         this.OptionsScreen = new SimpleContainer();
         this.OptionsScreen.setBounds(0, 0, this.getSize().width, this.getSize().height);
         this.TopLayer = new SimpleContainer();
-        this.TopLayer.setBounds(0, 0, this.getSize().width, this.getSize().height);
+        // 0, 0, this.getSize().width, this.getSize().height
+        this.TopLayer.setBounds(Main.frame.getBounds());
         this.OptionsScreen.add(this.optionspanel);
         this.ViewScreen.add(imageComponent);
         this.ViewScreen.add(imageComponent2);
@@ -301,7 +305,8 @@ ImageFilenameProvider {
         this.CurrentGameState.setAppletRef(this);
         this.CurrentRenderer = this.CurrentGameState.getRenderer();
         this.CurrentRenderer.setLocation(0, 0);
-        this.CurrentRenderer.setSize(480, 360);
+        // 480/360
+        this.CurrentRenderer.setSize(780, 560);
         this.CurrentGameState.getCurrentScene().setRenderer(this.CurrentRenderer);
         this.CurrentRenderer.setOffsetToCenter(this.CurrentGameState.getCurrentScene().getRobotStart());
         this.buildpanel = new BuildPanel(this, this.bay, this);
