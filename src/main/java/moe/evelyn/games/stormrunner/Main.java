@@ -36,13 +36,7 @@ public class Main
             @Override
             public void componentResized(ComponentEvent e)
             {
-                Dimension d=frame.getSize();
-                Dimension minD=frame.getMinimumSize();
-                if(d.width<minD.width)
-                    d.width=minD.width;
-                if(d.height<minD.height)
-                    d.height=minD.height;
-                frame.setSize(d);
+                frame.setSize(frame.getMinimumSize());
             }
         });
     }
