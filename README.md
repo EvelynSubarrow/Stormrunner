@@ -19,6 +19,8 @@ application, but I plan to make some minor changes to make the game more
 playable on modern systems.
 
 ## How to use this project
+Please use the latest [/releases](tagged release).
+
 If you don't trust the JAR files I've provided (and you shouldn't), you can
 obtain an archive of Stormrunner at the link in this section. Place
 `Stormrunner/TemplarStudios-Stormrunner-Media.jar` and
