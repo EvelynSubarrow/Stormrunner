@@ -636,7 +636,7 @@ extends KeyAdapter {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, -n);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 35: {
                 Renderer.this.setObjectToFollow(null);
@@ -648,51 +648,51 @@ extends KeyAdapter {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, -n);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 34: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, n);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 40: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, n);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 38: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, -n);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 37: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, 0);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 39: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, 0);
                 Renderer.this.setOffset(point);
-                return;
+                break;
             }
             case 32: {
                 if (Renderer.this.State == null) break;
                 Renderer.this.setObjectToFollow(Renderer.this.State.getCurrentRobot());
-                return;
+                break;
             }
             case 71: {
                 GameApplet gameApplet = GameApplet.thisApplet;
                 if (gameApplet.getGrid().isOn()) {
                     gameApplet.getGrid().burnGridOff();
-                    return;
+                    break;
                 }
                 gameApplet.getGrid().burnGridOn();
-                return;
+                break;
             }
         }
     }
