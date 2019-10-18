@@ -1,5 +1,5 @@
 # Stormrunner
-![A yellow RCX robot sits atop a field of sand, below the wreck of the CESS Decatur spaceship](https://i.imgur.com/jA4Ezz0.png "Screenshot")
+![A yellow RCX robot sits atop a field of sand, beside the wreck of the CESS Decatur spaceship](https://i.imgur.com/A48SVeU.png "Screenshot")
 
 ## About Stormrunner
 Stormrunner was developed by Templar Studios and released in the year 2000 to
@@ -13,10 +13,13 @@ and in-game datalogs provided by Macromedia's Flash.
 
 ## About this project
 This project uses a much-maligned feature of ShadowJar to combine original
-Stormrunner JAR files with compiled modifications into a single JAR. At present,
-the modifications just allow this game to be run as a standalone java
-application, but I plan to make some minor changes to make the game more
-playable on modern systems.
+Stormrunner JAR files with compiled modifications into a single JAR.
+
+## Changelog
+### 1.0.0
+* Not an applet
+### 1.1.0
+* World view fills the game window (original resolution was just 500x400!)
 
 ## How to use this project
 Please use the latest [tagged release](https://github.com/EvelynSubarrow/Stormrunner).
