@@ -202,6 +202,13 @@ ImageFilenameProvider {
         this.startup();
     }
 
+    public synchronized void redimension(Dimension newDimensions)
+    {
+        if (CurrentRenderer!=null) {
+            CurrentRenderer.redimension(newDimensions);
+        }
+    }
+
     public void startup() {
         this.setLayout(null);
         String string = this.getParameter("HelpURL");

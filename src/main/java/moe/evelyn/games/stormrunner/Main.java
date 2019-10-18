@@ -10,6 +10,7 @@ import java.awt.event.ComponentEvent;
 public class Main
 {
     public static JFrame frame;
+    public static GameApplet applet;
 
     public static void main(String[] args)
     {
@@ -22,6 +23,8 @@ public class Main
         frame.setLocation(0, 0);
 
         GameApplet applet = new GameApplet();
+        Main.applet = applet;
+
         frame.getContentPane().add(applet);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -36,7 +39,7 @@ public class Main
             @Override
             public void componentResized(ComponentEvent e)
             {
-
+                Main.applet.redimension(Main.frame.getSize());
             }
         });
     }

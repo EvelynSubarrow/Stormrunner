@@ -22,6 +22,8 @@ import com.templar.games.stormrunner.templarutil.gui.ImageContainer;
 import com.templar.games.stormrunner.templarutil.gui.ReportingComponentListener;
 import com.templar.games.stormrunner.templarutil.gui.SimpleContainer;
 import com.templar.games.stormrunner.templarutil.util.OrderedTable;
+import moe.evelyn.games.stormrunner.Main;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -43,18 +45,18 @@ public class Renderer
 extends ImageContainer
 implements FocusListener,
 ShroudListener {
-    public static final int TILEWIDTH = 50;
-    public static final int TILEHEIGHT = 50;
-    public static final int WINDOWWIDTH = 480;
-    public static final int WINDOWHEIGHT = 360;
-    public static final int BUFFERWIDTH = 500;
-    public static final int BUFFERHEIGHT = 400;
+    public static int TILEWIDTH = 50;
+    public static int TILEHEIGHT = 50;
+    public static int WINDOWWIDTH = 480;
+    public static int WINDOWHEIGHT = 360;
+    public static int BUFFERWIDTH = 500;
+    public static int BUFFERHEIGHT = 400;
 
     //public static final int WINDOWTILEWIDTH = (int)Math.ceil(9.0);
     //public static final int WINDOWTILEHEIGHT = (int)Math.ceil(7.0);
 
-    public static final int WINDOWTILEWIDTH = (int)Math.ceil(15.0);
-    public static final int WINDOWTILEHEIGHT = (int)Math.ceil(11.0);
+    public static int WINDOWTILEWIDTH = (int)Math.ceil(15.0);
+    public static int WINDOWTILEHEIGHT = (int)Math.ceil(11.0);
 
     protected Scene CurrentScene;
     protected Map map;
@@ -81,18 +83,44 @@ ShroudListener {
     private Object BlitLock = new Object();
 
     public Renderer(GameState gameState) {
-        // 500/400
-        this.setBufferSize(new Dimension(800, 600));
-        this.Surface = new ImageContainer();
-        // 500/400
-        this.Surface.setBufferSize(new Dimension(800, 600));
-        // 480/360
-        this.Surface.setBounds(0, 0, 780, 560);
+        this.currentDimensions = new Dimension(800,600);
+        this.setBounds(new Dimension(800,600));
         this.State = gameState;
         this.Offset = new Point(0, 0);
         this.kh = new KeyHandler();
         this.addKeyListener(this.kh);
         this.addFocusListener(this);
+    }
+
+    private ClickDelegator clickDelegator;
+    private Dimension currentDimensions;
+
+    public void setBounds(Dimension newDimensions)
+    {
+        // 500/400
+        this.setBufferSize(newDimensions);
+        this.Surface = new ImageContainer();
+        // 500/400
+        this.Surface.setBufferSize(newDimensions);
+        // 480/360
+        this.Surface.setBounds(0, 0, newDimensions.width-20, newDimensions.height-40);
+
+        WINDOWWIDTH = newDimensions.width-20;
+        WINDOWHEIGHT = newDimensions.height-40;
+        BUFFERWIDTH = newDimensions.width;
+        BUFFERHEIGHT = newDimensions.height;
+
+        WINDOWTILEWIDTH = (int)Math.ceil(newDimensions.width/TILEWIDTH);
+        WINDOWTILEHEIGHT = (int)Math.ceil(newDimensions.height/TILEHEIGHT);
+    }
+
+    public synchronized void redimension(Dimension newDimensions)
+    {
+        this.currentDimensions = newDimensions;
+        this.setSize(newDimensions.width-20, newDimensions.height-40);
+        setBounds(newDimensions);
+
+        setScene(CurrentScene);
     }
 
     public void invalidate() {
@@ -109,7 +137,7 @@ ShroudListener {
                 this.GroundBufferImage.flush();
             }
             // 500/400
-            this.GroundBufferImage = this.createImage(800, 600);
+            this.GroundBufferImage = this.createImage(currentDimensions.width, currentDimensions.height);
             this.GroundBufferGraphics = this.GroundBufferImage.getGraphics();
         }
     }
@@ -137,13 +165,13 @@ ShroudListener {
         this.CurrentScene = scene;
         this.map = scene.getMap();
         this.MapSize = this.map.getSize();
-        ClickDelegator clickDelegator = new ClickDelegator(this, this.State.getCurrentScene());
+        this.clickDelegator = new ClickDelegator(this, this.State.getCurrentScene());
         // 480/360
-        clickDelegator.setBounds(0, 0, 780, 560);
+        clickDelegator.setBounds(0, 0, currentDimensions.width-20, currentDimensions.height-40);
         this.add(clickDelegator);
         this.shroud = this.State.getCurrentScene().getShroud();
         // 480/360
-        this.shroud.setSize(new Dimension(780, 560));
+        this.shroud.setSize(new Dimension(currentDimensions.width-20, currentDimensions.height-40));
         this.shroud.setLocation(0, 0);
         this.shroud.addShroudListener(this);
         this.register(this.shroud);
@@ -492,7 +520,7 @@ ShroudListener {
 
     public Dimension getSize() {
         // 480/360
-        return new Dimension(780, 560);
+        return new Dimension(currentDimensions.width-20, currentDimensions.height-40);
     }
 
     public Dimension getMinimumSize() {
@@ -548,13 +576,17 @@ ShroudListener {
 protected class GroundComponent
 extends Component {
         // 480/360
-    private final Rectangle DEFAULT_GROUND_TAINT = new Rectangle(0, 0, 780, 560);
+    //private final Rectangle DEFAULT_GROUND_TAINT = new Rectangle(0, 0, 780, 560);
     private boolean GroundBufferTainted = true;
-    private Rectangle GroundTaintArea = this.DEFAULT_GROUND_TAINT;
+    private Rectangle GroundTaintArea = getDefaultTaint();
     private Point GroundBlit;
 
+    private Rectangle getDefaultTaint() {
+        return new Rectangle(0,0, Renderer.this.currentDimensions.width-20, Renderer.this.currentDimensions.height-40);
+    }
+
     public void taintGround() {
-        this.taintGround(this.DEFAULT_GROUND_TAINT);
+        this.taintGround(this.getDefaultTaint());
     }
 
     public void taintGround(Rectangle rectangle) {
@@ -582,14 +614,14 @@ extends Component {
     public void paint(Graphics graphics) {
         if (this.GroundBufferTainted) {
             if (this.GroundTaintArea == null) {
-                this.GroundTaintArea = this.DEFAULT_GROUND_TAINT;
+                this.GroundTaintArea = this.getDefaultTaint();
             }
             if (this.GroundBlit != null) {
                 Rectangle rectangle = Renderer.this.GroundBufferGraphics.getClipBounds();
                 // 500/400
-                Renderer.this.GroundBufferGraphics.setClip(0, 0, 800, 600);
+                Renderer.this.GroundBufferGraphics.setClip(0, 0, Renderer.this.currentDimensions.width-20, Renderer.this.currentDimensions.height-40);
                 // 500/400
-                Renderer.this.GroundBufferGraphics.copyArea(0, 0, 800, 600, this.GroundBlit.x, this.GroundBlit.y);
+                Renderer.this.GroundBufferGraphics.copyArea(0, 0, Renderer.this.currentDimensions.width, Renderer.this.currentDimensions.height, this.GroundBlit.x, this.GroundBlit.y);
                 Renderer.this.GroundBufferGraphics.setClip(rectangle);
                 this.GroundBlit = null;
             }
@@ -636,53 +668,62 @@ extends KeyAdapter {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, -n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 35: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 return;
             }
             case 33: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, -n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 34: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 40: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 38: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, -n);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 37: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, 0);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 39: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, 0);
                 Renderer.this.setOffset(point);
+                Renderer.this.invalidate();
                 break;
             }
             case 32: {
                 if (Renderer.this.State == null) break;
                 Renderer.this.setObjectToFollow(Renderer.this.State.getCurrentRobot());
+                Renderer.this.invalidate();
                 break;
             }
             case 71: {
@@ -695,7 +736,6 @@ extends KeyAdapter {
                 break;
             }
         }
-        Renderer.this.invalidate();
     }
 
     protected KeyHandler() {
