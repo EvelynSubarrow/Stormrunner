@@ -695,6 +695,7 @@ extends KeyAdapter {
                 break;
             }
         }
+        Renderer.this.invalidate();
     }
 
     protected KeyHandler() {
