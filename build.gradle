@@ -8,6 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        classpath 'org.ajoberstar:grgit:1.5.0'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
     }
 }
@@ -24,15 +25,21 @@ sourceSets {
             srcDirs= ["src/main/java"]
         }
         resources {
-            srcDirs= ["src/main/resources", "libs"]
+            srcDirs= ["libs"]
         }
     }
+}
+
+ext {
+    git = org.ajoberstar.grgit.Grgit.open(file('.'))
+    revision = git.head().id
 }
 
 jar {
     manifest {
         attributes(
             "Version"     : version,
+            "Git-Version" : revision,
             "Main-Class"  : 'moe.evelyn.games.stormrunner.Main'
         )
     }
