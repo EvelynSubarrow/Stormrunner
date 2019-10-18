@@ -18,7 +18,6 @@ public class Main
         Main.frame = frame;
 
         frame.setUndecorated(false);
-        frame.setMaximumSize(new Dimension(500, 400));
         frame.setMinimumSize(new Dimension(500, 400));
         frame.setLocation(0, 0);
 

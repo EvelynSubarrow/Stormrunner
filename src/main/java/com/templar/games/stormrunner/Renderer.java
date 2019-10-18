@@ -83,8 +83,8 @@ ShroudListener {
     private Object BlitLock = new Object();
 
     public Renderer(GameState gameState) {
-        this.currentDimensions = new Dimension(800,600);
-        this.setBounds(new Dimension(800,600));
+        this.currentDimensions = Main.frame.getSize();
+        this.setBounds(new Dimension(currentDimensions.width,currentDimensions.height));
         this.State = gameState;
         this.Offset = new Point(0, 0);
         this.kh = new KeyHandler();
