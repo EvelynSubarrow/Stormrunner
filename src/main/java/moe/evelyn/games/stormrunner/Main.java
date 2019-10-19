@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 public class Main
 {
@@ -27,6 +30,18 @@ public class Main
         frame.getContentPane().add(applet);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        String versionNumber = "error";
+        String versionCommit = "error";
+        try {
+            Manifest manifest = new Manifest(Main.class.getClassLoader().getResourceAsStream("META-INF/MANIFEST.MF"));
+            Attributes attributes = manifest.getMainAttributes();
+            versionNumber = attributes.getValue("Version");
+            versionCommit = attributes.getValue("Version-Commit");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        frame.setTitle(String.format("Stormrunner 1.1/%s (%s)", versionNumber, versionCommit));
 
         frame.pack();
         applet.init();
