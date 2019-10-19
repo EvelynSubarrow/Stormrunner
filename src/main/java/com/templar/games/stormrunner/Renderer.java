@@ -103,7 +103,7 @@ ShroudListener {
         // 500/400
         this.Surface.setBufferSize(newDimensions);
         // 480/360
-        this.Surface.setBounds(0, 0, newDimensions.width-20, newDimensions.height-40);
+        this.Surface.setBounds(0, 0, newDimensions.width, newDimensions.height);
 
         WINDOWWIDTH = newDimensions.width-20;
         WINDOWHEIGHT = newDimensions.height-40;
@@ -117,7 +117,7 @@ ShroudListener {
     public synchronized void redimension(Dimension newDimensions)
     {
         this.currentDimensions = newDimensions;
-        this.setSize(newDimensions.width-20, newDimensions.height-40);
+        this.setSize(newDimensions.width, newDimensions.height);
         setBounds(newDimensions);
 
         setScene(CurrentScene);
@@ -171,7 +171,7 @@ ShroudListener {
         this.add(clickDelegator);
         this.shroud = this.State.getCurrentScene().getShroud();
         // 480/360
-        this.shroud.setSize(new Dimension(currentDimensions.width-20, currentDimensions.height-40));
+        this.shroud.setSize(new Dimension(currentDimensions.width, currentDimensions.height));
         this.shroud.setLocation(0, 0);
         this.shroud.addShroudListener(this);
         this.register(this.shroud);
@@ -520,7 +520,7 @@ ShroudListener {
 
     public Dimension getSize() {
         // 480/360
-        return new Dimension(currentDimensions.width-20, currentDimensions.height-40);
+        return new Dimension(currentDimensions.width, currentDimensions.height);
     }
 
     public Dimension getMinimumSize() {
@@ -582,7 +582,7 @@ extends Component {
     private Point GroundBlit;
 
     private Rectangle getDefaultTaint() {
-        return new Rectangle(0,0, Renderer.this.currentDimensions.width-20, Renderer.this.currentDimensions.height-40);
+        return new Rectangle(0,0, Renderer.this.currentDimensions.width, Renderer.this.currentDimensions.height);
     }
 
     public void taintGround() {
@@ -619,7 +619,7 @@ extends Component {
             if (this.GroundBlit != null) {
                 Rectangle rectangle = Renderer.this.GroundBufferGraphics.getClipBounds();
                 // 500/400
-                Renderer.this.GroundBufferGraphics.setClip(0, 0, Renderer.this.currentDimensions.width-20, Renderer.this.currentDimensions.height-40);
+                Renderer.this.GroundBufferGraphics.setClip(0, 0, Renderer.this.currentDimensions.width, Renderer.this.currentDimensions.height);
                 // 500/400
                 Renderer.this.GroundBufferGraphics.copyArea(0, 0, Renderer.this.currentDimensions.width, Renderer.this.currentDimensions.height, this.GroundBlit.x, this.GroundBlit.y);
                 Renderer.this.GroundBufferGraphics.setClip(rectangle);
