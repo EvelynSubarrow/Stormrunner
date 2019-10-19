@@ -204,6 +204,15 @@ ImageFilenameProvider {
 
     public synchronized void redimension(Dimension newDimensions)
     {
+        setSize(newDimensions);
+
+        if (opspanel!=null) {
+            opspanel.setLocation(0, this.getSize().height - this.opspanel.getSize().height - 20);
+        }
+        if (statpanel!=null) {
+            this.statpanel.setLocationHolder(this.getSize().width - this.statpanel.getSize().width - 5, this.getSize().height - this.statpanel.getSize().height - 20);
+            this.statpanel.setLocation(this.getSize().width - this.statpanel.getSize().width - 5, this.getSize().height - this.statpanel.getHeight() - 20);
+        }
         if (CurrentRenderer!=null) {
             CurrentRenderer.redimension(newDimensions);
         }
@@ -313,7 +322,7 @@ ImageFilenameProvider {
         this.CurrentRenderer = this.CurrentGameState.getRenderer();
         this.CurrentRenderer.setLocation(0, 0);
         // 480/360
-        this.CurrentRenderer.setSize(780, 560);
+        this.CurrentRenderer.setSize(Main.frame.getWidth(), Main.frame.getHeight());
         this.CurrentGameState.getCurrentScene().setRenderer(this.CurrentRenderer);
         this.CurrentRenderer.setOffsetToCenter(this.CurrentGameState.getCurrentScene().getRobotStart());
         this.buildpanel = new BuildPanel(this, this.bay, this);
