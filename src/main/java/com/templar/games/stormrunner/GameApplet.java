@@ -262,7 +262,7 @@ ImageFilenameProvider {
         this.CurrentGrid.setBounds(0, 0, this.getSize().width, this.getSize().height);
         this.CurrentGrid.setOn(true);
         this.opspanel = new OpsPanel(this, this);
-        this.opspanel.setLocation(0, this.getSize().height - this.opspanel.getSize().height);
+        this.opspanel.setLocation(0, this.getSize().height - this.opspanel.getSize().height - 20);
         boolean bl = false;
         boolean bl2 = false;
         if (this.optionspanel != null) {
@@ -328,7 +328,7 @@ ImageFilenameProvider {
         this.buildpanel = new BuildPanel(this, this.bay, this);
         this.buildpanel.setLocation(0, 0);
         this.statpanel = new StatusPanel(this, this.CurrentGameState);
-        this.statpanel.setLocationHolder(this.getSize().width - this.statpanel.getSize().width - 5, this.getSize().height - this.statpanel.getSize().height);
+        this.statpanel.setLocationHolder(this.getSize().width - this.statpanel.getSize().width - 5, this.getSize().height - this.statpanel.getSize().height - 20);
         this.statpanel.setLocation(this.getSize().width - this.statpanel.getSize().width - 5, this.getSize().height - 20);
         this.CurrentEditor = new Editor(this.CurrentGameState, this, null, this);
         this.CurrentEditor.setLocation(0, 35);
