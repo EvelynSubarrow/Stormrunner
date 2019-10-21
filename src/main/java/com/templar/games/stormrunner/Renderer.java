@@ -327,6 +327,9 @@ ShroudListener {
         if (point.x < 0 || point.y < 0 || point.x >= this.MapSize.width - WINDOWTILEWIDTH || point.y >= this.MapSize.height - WINDOWTILEHEIGHT) {
             return false;
         }
+        if (!point.equals(NewOffset)&&FollowingObject==null) {
+            Renderer.this.invalidate();
+        }
         this.NewOffset = point;
         this.repaint();
         return true;
@@ -668,62 +671,53 @@ extends KeyAdapter {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, -n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 35: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 return;
             }
             case 33: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, -n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 34: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 40: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 38: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(0, -n);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 37: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(-n, 0);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 39: {
                 Renderer.this.setObjectToFollow(null);
                 point.translate(n, 0);
                 Renderer.this.setOffset(point);
-                Renderer.this.invalidate();
                 break;
             }
             case 32: {
                 if (Renderer.this.State == null) break;
                 Renderer.this.setObjectToFollow(Renderer.this.State.getCurrentRobot());
-                Renderer.this.invalidate();
                 break;
             }
             case 71: {
