@@ -15,14 +15,6 @@ and in-game datalogs provided by Macromedia's Flash.
 This project uses a much-maligned feature of ShadowJar to combine original
 Stormrunner JAR files with compiled modifications into a single JAR.
 
-## Changelog
-### 1.0.0
-* Not an applet
-### 1.1.0
-* World view fills the game window (original resolution was just 500x400!)
-### 1.2.0
-* World view fills to edge of window, following now has 100% fewer glitches! 
-
 ## How to use this project
 Please use the latest [tagged release](https://github.com/EvelynSubarrow/Stormrunner).
 
