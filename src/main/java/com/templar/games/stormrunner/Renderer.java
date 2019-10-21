@@ -327,9 +327,11 @@ ShroudListener {
         if (point.x < 0 || point.y < 0 || point.x >= this.MapSize.width - WINDOWTILEWIDTH || point.y >= this.MapSize.height - WINDOWTILEHEIGHT) {
             return false;
         }
-        if (!point.equals(NewOffset)&&FollowingObject==null) {
-            Renderer.this.invalidate();
+
+        if (!point.equals(NewOffset) ^ FollowingObject!=null) {
+            this.invalidate();
         }
+        
         this.NewOffset = point;
         this.repaint();
         return true;
