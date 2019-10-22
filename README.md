@@ -35,3 +35,6 @@ This project relies heavily on Lee Benfield's
 [CFR](https://github.com/leibnitz27/cfr/), and wouldn't be possible without
 bugfixes made in response to issues encountered decompiling these old
 classfiles. 
+
+## Disclaimer
+This project is not affiliated with the Lego company or with Templar Studios.
