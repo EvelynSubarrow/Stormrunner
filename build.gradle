@@ -13,10 +13,6 @@ buildscript {
     }
 }
 
-dependencies {
-    implementation files("libs/TemplarStudios-Stormrunner.jar")
-}
-
 version '1.2.0'
 
 sourceSets {
@@ -25,9 +21,24 @@ sourceSets {
             srcDirs= ["src/main/java"]
         }
         resources {
-            srcDirs= ["libs"]
+            srcDirs= ["shadow"]
         }
     }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'Jspresso'
+        url  'http://repository.jspresso.org/maven2/'
+    }
+}
+
+dependencies {
+    implementation files("shadow/TemplarStudios-Stormrunner.jar")
+    compile files("libs/DJNativeSwing-SWT.jar")
+    compile files("libs/DJNativeSwing.jar")
+    compile "net.java.dev.jna:jna:5.4.0"
 }
 
 ext {
@@ -40,7 +51,8 @@ jar {
         attributes(
             "Version"     : version,
             "Version-Commit" : revision,
-            "Main-Class"  : 'moe.evelyn.games.stormrunner.Main'
+            "Main-Class"  : 'moe.evelyn.games.stormrunner.Main',
+            "Class-Path"  : 'libs/swt.jar libs/DJNativeSwing-SWT.jar libs/DJNativeSwing.jar'
         )
     }
 }
