@@ -1,5 +1,8 @@
 package com.templar.games.stormrunner.templarutil.applet;
 
+import com.templar.games.stormrunner.GameApplet;
+import moe.evelyn.games.stormrunner.Main;
+
 import java.applet.Applet;
 import java.applet.AppletContext;
 import java.awt.Image;
@@ -68,10 +71,24 @@ public class TApplet extends Applet implements AppletContext {
     @Override
     public void showDocument(URL url, String target)
     {
-        System.out.print ("Showing document ");
-        System.out.print(url);
-        System.out.print(" target ");
-        System.out.println(target);
+        if(url.getFile().contains("datalog")) {
+            String rawDatalogName = url.getFile().substring(1).replace(".asp", "");
+            System.out.print("Asked to play datalog ");
+            System.out.println(rawDatalogName);
+
+            // You might think this is a bad way to do this, and you'd probably be right!
+            // TODO: not this
+            for(char c : "123abc".toCharArray()) {
+                GameApplet.audio.stop("datalog" + c);
+            }
+
+            GameApplet.audio.play(rawDatalogName);
+        } else {
+            System.out.print ("Showing document ");
+            System.out.print(url);
+            System.out.print(" target ");
+            System.out.println(target);
+        }
     }
 
     @Override

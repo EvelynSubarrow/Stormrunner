@@ -186,6 +186,10 @@ ImageFilenameProvider {
         hashtable.put("PlantNotice", "com/templar/games/stormrunner/media/sounds/effects/plant-notice.au");
         hashtable.put("PlantDeath", "com/templar/games/stormrunner/media/sounds/deaths/death-plant.au");
         hashtable.put("CliffSlip", "com/templar/games/stormrunner/media/sounds/deaths/death-cliff-slip.au");
+
+        hashtable.put("dataloga", "moe/evelyn/games/stormrunner/media/dataloga.au");
+        hashtable.put("datalogb", "moe/evelyn/games/stormrunner/media/datalogb.au");
+
         try {
             audio = new AudioManager(new SunAudioDevice(this), hashtable);
         }
