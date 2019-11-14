@@ -189,6 +189,11 @@ ImageFilenameProvider {
 
         hashtable.put("dataloga", "moe/evelyn/games/stormrunner/media/dataloga.au");
         hashtable.put("datalogb", "moe/evelyn/games/stormrunner/media/datalogb.au");
+        hashtable.put("datalogc", "moe/evelyn/games/stormrunner/media/datalogc.au");
+        hashtable.put("datalog1", "moe/evelyn/games/stormrunner/media/datalog1.au");
+        hashtable.put("datalog2", "moe/evelyn/games/stormrunner/media/datalog2.au");
+        hashtable.put("datalog3", "moe/evelyn/games/stormrunner/media/datalog3.au");
+
 
         try {
             audio = new AudioManager(new SunAudioDevice(this), hashtable);
