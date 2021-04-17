@@ -5,7 +5,7 @@
 Stormrunner was developed by Templar Studios and released in the year 2000 to
 promote Lego Mindstorms' range of RCX robots. The game was revolutionary, at the
 time one of the largest Java games ever written, with a dramatic introduction
-and in-game datalogs provided by Macromedia's Flash. 
+and in-game datalogs provided by Macromedia's Flash.
 
 ### links
 * Templar's [archived press release](https://web.archive.org/web/20070817042000/http://www.templar.com/info/pr_may2000.html)
@@ -21,7 +21,7 @@ Please use the latest [tagged release](https://github.com/EvelynSubarrow/Stormru
 If you don't trust the JAR files I've provided (and you shouldn't), you can
 obtain an archive of Stormrunner at the link in this section. Place
 `Stormrunner/TemplarStudios-Stormrunner-Media.jar` and
-`TemplarStudios-Stormrunner.jar` into `libs/`
+`TemplarStudios-Stormrunner.jar` into `shadow/`
 
 Whether or not you trust me, if you have Gradle installed, the single next step
 is running `gradle shadowJar`. You should then have a runnable game jar in
