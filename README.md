@@ -4,19 +4,42 @@
 ## About Stormrunner
 Stormrunner was developed by Templar Studios and released in the year 2000 to
 promote Lego Mindstorms' range of RCX robots. The game was revolutionary, at the
-time one of the largest Java games ever written, with a dramatic introduction
-and in-game datalogs provided by Macromedia's Flash.
+time one of the largest Java games ever written, accessible as an applet, with a
+dramatic introduction and in-game datalogs provided by Macromedia's Flash.
 
 ### links
 * Templar's [archived press release](https://web.archive.org/web/20070817042000/http://www.templar.com/info/pr_may2000.html)
 * [Introduction flash video](http://biomediaproject.com/bmp/files/LEGO/gms/online/Mindstorms/Stormrunner/Stormrunner/images/sr-intro.swf)
 
 ## About this project
-This project uses a much-maligned feature of ShadowJar to combine original
-Stormrunner JAR files with compiled modifications into a single JAR.
+This project uses a ShadowJar feature to combine original Stormrunner JAR files
+with compiled modifications.
 
-## How to use this project
-Please use the latest [tagged release](https://github.com/EvelynSubarrow/Stormrunner).
+The objective is to maintain a version of the game which is as functional as it
+can be on modern computers.
+
+## How to use this project (without compiling)
+Please ensure that you have a compatible JRE installed (see the section below for
+information on that). Get the JAR file from the latest release, and put it
+somewhere convenient. Stormrunner doesn't place any files in the same directory,
+so the location isn't too important.
+
+### Linux
+Open a terminal, get yourself to the same directory as the stormrunner jar, and run
+`java -jar stormrunner_filename.jar`, substituting the filename. If you've got
+multiple versions of the jvm installed and `java` won't be a compatible one, on
+Linux at least you should look in `/usr/lib/jvm` and select an appropriate
+version, and use it something like this:
+`/usr/lib/jvm/adoptopenjdk-8-hotspot-jre-amd64/bin/java stormrunner_filename.jar`
+
+### Windows
+Generally, you should be able to run the game by just ensuring you have
+Java installed, then doubleclicking on the jarfile. You may encounter some
+difficulty if there's different versions, and you'll have to select the
+appropriate one using command prompt if so.
+
+## How to compile this project
+Please checkout the latest [tagged release](https://github.com/EvelynSubarrow/Stormrunner).
 
 If you don't trust the JAR files I've provided (and you shouldn't), you can
 obtain an archive of Stormrunner at the link in this section. Place
