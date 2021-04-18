@@ -27,6 +27,22 @@ Whether or not you trust me, if you have Gradle installed, the single next step
 is running `gradle shadowJar`. You should then have a runnable game jar in
 `build/libs/`!
 
+### A word on the Java runtime
+It's highly recommended that you use a version 8 Java runtime environment.
+If you don't have one installed, [AdoptOpenJDK](https://adoptopenjdk.net)
+packages are easy to use, and are available for Linux, Windows, MacOS,
+Solaris, and AIX.
+
+If you are using Debian or Ubuntu in particular, the packaged versions of
+OpenJDK have exciting sound bugs which cause deadlock. I've mitigated this
+by disabling sound entirely in that case, but if this applies and you
+want sound, use Oracle or AdoptOpenJDK JREs instead.
+
+Version 9 of the JRE is the last version likely to work at all with this.
+Java has made significant changes to backwards compatibility since then,
+affecting both sound and graphics, and there's only so much that can be done
+without a total rewrite which may not be practical.
+
 ### links
 * http://biomediaproject.com/bmp/files/LEGO/gms/download/Mindstorms/Stormrunner.zip
 
