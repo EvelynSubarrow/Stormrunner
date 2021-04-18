@@ -200,11 +200,22 @@ ImageFilenameProvider {
             // and using them will cause deadlock. If they're present, drop to Null
             try {
                 Class.forName("org.classpath.icedtea.pulseaudio.PulseAudioDataLine");
-                System.out.println("This is a Ubuntu/Debian OpenJDK version with faulty audio bindings. Sound is disabled, consider using AdoptOpenJDK built versions instead");
+                System.out.println("This is a Ubuntu/Debian OpenJDK version with faulty audio bindings. Sound is disabled, consider using AdoptOpenJDK version 8 instead");
                 throw new Exception("");
             } catch (ClassNotFoundException _e) {}
 
+            // SE10 and onwards probably doesn't have Sun audio support. There's some
+            // non-deprecated APIs that might be a better fit, but until then,
+            try {
+                Class.forName("sun.audio.AudioDataStream");
+            } catch (ClassNotFoundException _e) {
+                System.out.println("Couldn't find sun/audio/*. Sound is disabled. Please consider using JRE version 8 if you want sound.");
+                throw new Exception("");
+            }
+
             audio = new AudioManager(new SunAudioDevice(this), hashtable);
+
+
         }
         catch (Exception exception) {
             System.err.println("Stormrunner: Error initializing AudioManager. Falling back to Null.");
