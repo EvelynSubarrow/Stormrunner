@@ -196,17 +196,19 @@ ImageFilenameProvider {
 
 
         try {
+            // Ubuntu/Debian OpenJDK of the wrong versions have buggy pulse bindings
+            // and using them will cause deadlock. If they're present, drop to Null
+            try {
+                Class.forName("org.classpath.icedtea.pulseaudio.PulseAudioDataLine");
+                System.out.println("This is a Ubuntu/Debian OpenJDK version with faulty audio bindings. Sound is disabled, consider using AdoptOpenJDK built versions instead");
+                throw new Exception("");
+            } catch (ClassNotFoundException _e) {}
+
             audio = new AudioManager(new SunAudioDevice(this), hashtable);
         }
         catch (Exception exception) {
-            System.err.println("Stormrunner: Error initializing AudioManager. Falling back to AppletAudioDevice.");
-            try {
-                audio = new AudioManager(new AppletAudioDevice(this), hashtable);
-            }
-            catch (Exception exception2) {
-                System.err.println("Stormrunner: Error initializing AppletAudioDevice. Sounds disabled.");
-                audio = new AudioManager(new NullAudioDevice(), null);
-            }
+            System.err.println("Stormrunner: Error initializing AudioManager. Falling back to Null.");
+            audio = new AudioManager(new NullAudioDevice(), null);
         }
         this.startup();
     }
